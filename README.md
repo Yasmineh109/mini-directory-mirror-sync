@@ -30,3 +30,10 @@ The key trade-off is comparison strategy. Timestamps are unreliable across netwo
 - Only regular files are tracked. Empty directories are not preserved as entries — if a source directory becomes empty of files, the corresponding destination directory is left in place rather than removed. This keeps the implementation simple and avoids surprises with permission-locked directories.
 - `sync` raises `FileNotFoundError` if the source is not a directory. It does not silently no-op.
 - When a file shrinks, the destination is removed and re-copied rather than overwritten in place, guaranteeing no stale trailing bytes remain.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
