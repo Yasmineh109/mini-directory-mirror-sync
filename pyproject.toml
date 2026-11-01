@@ -1,6 +1,6 @@
 [project]
 name = "mini-directory-mirror-sync"
-version = "0.1.0"
+version = "0.1.1"
 description = "Synchronizes a destination directory with a source, copying changed files and deleting removed ones."
 requires-python = ">=3.10"
 dependencies = []
